@@ -144,15 +144,18 @@ def select_and_predict(train, test, variant, output, roll):
 def plot_results(results, chosen, actual, predicted, variant, output):
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False})
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.7), layout="constrained")
-    for features, group in results.groupby("features", sort=False):
+    line_styles = [("black", "o", "-"), ("#666666", "s", "--")]
+    for i, (features, group) in enumerate(results.groupby("features", sort=False)):
         curve = group.groupby("degree").cv_mse.min()
-        axes[0].plot(curve.index, curve.values, "o-", ms=4, label=features)
+        color, marker, linestyle = line_styles[i % len(line_styles)]
+        axes[0].plot(curve.index, curve.values, color=color, marker=marker,
+                     linestyle=linestyle, ms=4, label=features)
     axes[0].scatter([chosen.degree], [chosen.cv_mse], s=90, facecolors="none", edgecolors="black", zorder=5)
     axes[0].set(xlabel="Polynomial degree", ylabel="5-fold CV MSE", title="Degree and feature comparison", yscale="log")
     axes[0].legend(fontsize=8)
-    axes[1].scatter(actual, predicted, s=12, alpha=.55, color="#176B87")
+    axes[1].scatter(actual, predicted, s=12, alpha=.55, color="#333333")
     limits = [min(actual.min(), predicted.min()), max(actual.max(), predicted.max())]
-    axes[1].plot(limits, limits, "--", color="#E07A5F", lw=1)
+    axes[1].plot(limits, limits, "--", color="black", lw=1)
     axes[1].set(xlabel="Actual y", ylabel="Predicted y", title="Untouched 20% holdout")
     fig.savefig(output / f"var{variant}_validation.png", dpi=180)
     plt.close(fig)

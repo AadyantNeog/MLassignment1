@@ -15,9 +15,10 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "output" / "pdf"
-INK = colors.HexColor("#18364A")
-TEAL = colors.HexColor("#176B87")
-LIGHT = colors.HexColor("#EDF4F7")
+INK = colors.black
+ACCENT = colors.black
+LIGHT = colors.HexColor("#F2F2F2")
+RULE = colors.HexColor("#BFBFBF")
 
 
 def main():
@@ -38,7 +39,7 @@ def main():
     styles.add(ParagraphStyle("TitleCustom", fontName=bold_font, fontSize=27, leading=31,
                               textColor=INK, spaceAfter=12))
     styles.add(ParagraphStyle("HeadingCustom", fontName=bold_font, fontSize=14, leading=18,
-                              textColor=TEAL, spaceBefore=10, spaceAfter=7))
+                              textColor=ACCENT, spaceBefore=10, spaceAfter=7))
     styles.add(ParagraphStyle("SmallCustom", fontName=base_font, fontSize=8.6, leading=11.5,
                               textColor=INK, spaceAfter=6))
     styles.add(ParagraphStyle("CellCustom", fontName=base_font, fontSize=8.5, leading=11,
@@ -61,8 +62,8 @@ def main():
             ("RIGHTPADDING", (0, 0), (-1, -1), 8),
             ("TOPPADDING", (0, 0), (-1, -1), 7),
             ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
-            ("LINEBELOW", (0, 0), (-1, 0), .7, TEAL),
-            ("LINEBELOW", (0, 1), (-1, -1), .3, colors.HexColor("#D4E0E6")),
+            ("LINEBELOW", (0, 0), (-1, 0), .7, ACCENT),
+            ("LINEBELOW", (0, 1), (-1, -1), .3, RULE),
         ]))
         story.append(item)
         story.append(Spacer(1, 8))
@@ -160,7 +161,7 @@ def main():
     add("For inference without retraining, run <b>python predict.py --model artifacts/var1_model.joblib "
         "--input BT2024186/BT2024186_test_var1.csv --output predictions.csv</b>. Use the analogous var2 "
         "paths for the second problem. README.md contains Windows commands and dependency instructions.")
-    add('Repository: <link href="https://github.com/AadyantNeog/MLassignment1" color="#176B87">'
+    add('Repository: <link href="https://github.com/AadyantNeog/MLassignment1" color="#000000">'
         'github.com/AadyantNeog/MLassignment1</link>. All model selection and inference code is supplied.')
     table([["Deliverable", "Contents"],
            ["BT2024186_pred_var1.csv", "1,000 predictions; a single y column; original test row order"],
@@ -184,7 +185,7 @@ def main():
                             author="BT2024186")
 
     def footer(canvas, doc):
-        canvas.setStrokeColor(colors.HexColor("#D4E0E6"))
+        canvas.setStrokeColor(RULE)
         canvas.line(52.64, 35, 542.64, 35)
         canvas.setFont(base_font, 8)
         canvas.setFillColor(INK)
