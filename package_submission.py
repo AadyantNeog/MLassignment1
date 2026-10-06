@@ -1,4 +1,4 @@
-"""Validate predictions and package the three submission files with the repo URL."""
+"""Validate predictions and package the two prediction files and report."""
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 from verify_outputs import main as verify
@@ -15,11 +15,9 @@ def main():
         raise ValueError("A submission deliverable is missing")
     folder = ROOT / "submission"
     folder.mkdir(exist_ok=True)
-    repository = folder / "REPOSITORY.txt"
-    repository.write_text("https://github.com/AadyantNeog/MLassignment1\n", encoding="utf-8")
     destination = folder / "BT2024186_submission.zip"
     with ZipFile(destination, "w", compression=ZIP_DEFLATED) as archive:
-        for path in paths + [repository]:
+        for path in paths:
             archive.write(path, arcname=path.name)
     with ZipFile(destination) as archive:
         assert archive.testzip() is None

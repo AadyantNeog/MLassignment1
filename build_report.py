@@ -68,6 +68,8 @@ def main():
         story.append(item)
         story.append(Spacer(1, 8))
 
+    add('Repository: <link href="https://github.com/AadyantNeog/MLassignment1" color="#000000">'
+        'https://github.com/AadyantNeog/MLassignment1</link>', "SmallCustom")
     add("POLYNOMIAL REGRESSION", "SmallCustom")
     add("Geothermal power<br/>and reservoir prediction", "TitleCustom")
     add("Machine Learning Assignment 1 | Roll number: <b>BT2024186</b>")
@@ -161,8 +163,6 @@ def main():
     add("For inference without retraining, run <b>python predict.py --model artifacts/var1_model.joblib "
         "--input BT2024186/BT2024186_test_var1.csv --output predictions.csv</b>. Use the analogous var2 "
         "paths for the second problem. README.md contains Windows commands and dependency instructions.")
-    add('Repository: <link href="https://github.com/AadyantNeog/MLassignment1" color="#000000">'
-        'github.com/AadyantNeog/MLassignment1</link>. All model selection and inference code is supplied.')
     table([["Deliverable", "Contents"],
            ["BT2024186_pred_var1.csv", "1,000 predictions; a single y column; original test row order"],
            ["BT2024186_pred_var2.csv", "1,000 predictions; a single y column; original test row order"],

@@ -88,7 +88,7 @@ its column name and row count.
 | `predict.py` | Load a saved model and run inference |
 | `verify_outputs.py` | Check submission schema, row order, inference and polynomial coefficients |
 | `build_report.py` | Generate the four-page PDF from the measured results |
-| `package_submission.py` | Verify and bundle the report, predictions and repository URL |
+| `package_submission.py` | Verify and bundle the report and predictions |
 | `BT2024186/` | Original training and test datasets |
 | `BT2024186_pred_var1.csv`, `BT2024186_pred_var2.csv` | Submission predictions |
 | `artifacts/metrics.json` | Selected models, validation results and environment versions |
@@ -104,4 +104,4 @@ coefficients and recorded holdout MSE.
 
 After building the report, run `python package_submission.py` to recreate
 `submission/BT2024186_submission.zip`. It contains both prediction CSVs, the
-report and a text file with the repository URL.
+report. The clickable repository URL is at the top of the report.
